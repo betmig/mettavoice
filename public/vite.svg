@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <!-- Outer circle -->
+  <circle cx="12" cy="12" r="8" stroke="#b87537" stroke-width="2"/>
+  
+  <!-- Center circle -->
+  <circle cx="12" cy="12" r="2" fill="#b87537"/>
+  
+  <!-- Extended spokes - going beyond circle by ~1 unit -->
+  <line x1="12" y1="3" x2="12" y2="9.5" stroke="#b87537" stroke-width="2"/>
+  <line x1="12" y1="14.5" x2="12" y2="21" stroke="#b87537" stroke-width="2"/>
+  <line x1="3" y1="12" x2="9.5" y2="12" stroke="#b87537" stroke-width="2"/>
+  <line x1="14.5" y1="12" x2="21" y2="12" stroke="#b87537" stroke-width="2"/>
+  
+  <!-- Diagonal spokes - extended ~1 unit beyond circle -->
+  <line x1="5.636" y1="5.636" x2="10.243" y2="10.243" stroke="#b87537" stroke-width="2"/>
+  <line x1="13.757" y1="13.757" x2="18.364" y2="18.364" stroke="#b87537" stroke-width="2"/>
+  <line x1="5.636" y1="18.364" x2="10.243" y2="13.757" stroke="#b87537" stroke-width="2"/>
+  <line x1="13.757" y1="10.243" x2="18.364" y2="5.636" stroke="#b87537" stroke-width="2"/>
+</svg>

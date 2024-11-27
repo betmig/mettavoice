@@ -1,0 +1,1 @@
+<command>npm install @aws-sdk/client-polly</command>

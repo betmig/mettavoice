@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('/fonts/OpenDyslexic-Regular.woff2') format('woff2'),
+       url('/fonts/OpenDyslexic-Regular.woff') format('woff'),
+       url('/fonts/OpenDyslexic-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --primary: #b87537;
+  --primary-hover: #9c6330;
+  --brightness: 100%;
+  --contrast: 100%;
+  --sepia: 0%;
+  --grayscale: 0%;
+  --nav-width: 5rem;
+}
+
+html, body {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+/* Add smooth transition for theme changes */
+html {
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+/* Add transitions for common theme-affected properties */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: ease-in-out;
+  transition-duration: 200ms;
+}
+
+/* Separate filter transitions to prevent interference with theme */
+#root {
+  height: 100%;
+  filter: brightness(var(--brightness)) contrast(var(--contrast)) sepia(var(--sepia)) grayscale(var(--grayscale));
+  transition: filter 200ms ease-in-out;
+}
+
+body {
+  @apply antialiased;
+}
+
+/* Define reusable component styles */
+.component-container {
+  @apply bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/20 dark:border-gray-700/20;
+}
+
+.component-container-inner {
+  @apply bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-200/20 dark:border-gray-700/20;
+}
+
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary;
+}
+
+button, a {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary;
+}
+
+.text-gray-600 {
+  @apply dark:text-gray-300;
+}
+
+input[type="range"] {
+  @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700;
+}
+
+select, input {
+  @apply border-gray-300 focus:border-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700 dark:text-white;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  @apply w-4 h-4 bg-primary rounded-full cursor-pointer appearance-none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  @apply w-4 h-4 bg-primary rounded-full cursor-pointer border-0;
+}
+
+.dark input[type="range"]::-webkit-slider-thumb {
+  @apply bg-primary;
+}
+
+.dark input[type="range"]::-moz-range-thumb {
+  @apply bg-primary;
+}
+
+input[type="color"] {
+  @apply h-10 w-20 p-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer;
+  -webkit-appearance: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+.font-dyslexic {
+  font-family: 'OpenDyslexic', system-ui, -apple-system, sans-serif !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Prevent content shift on mobile when nav opens */
+body.overflow-hidden {
+  padding-right: var(--scrollbar-width, 0px);
+}

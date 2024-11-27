@@ -1,0 +1,46 @@
+{
+  "name": "metta-voice",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "start": "vite"
+  },
+  "dependencies": {
+    "@aws-sdk/client-polly": "^3.474.0",
+    "@floating-ui/react": "^0.26.9",
+    "axios": "^1.6.7",
+    "axios-retry": "^4.0.0",
+    "cors-anywhere": "^0.4.4",
+    "http-proxy-middleware": "^2.0.6",
+    "lodash": "^4.17.21",
+    "lucide-react": "^0.344.0",
+    "microsoft-cognitiveservices-speech-sdk": "^1.34.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
+    "speak-tts": "^2.0.8",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  }
+}
