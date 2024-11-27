@@ -1,4 +1,4 @@
-# Metta Voice 🌿
+# Metta Voice ☸️
 
 A modern meditation app combining traditional Buddhist suttas with accessibility-focused features. Built and maintained by [Betmig](https://github.com/betmig) from [MettaBit](https://mettabit.io).
 
