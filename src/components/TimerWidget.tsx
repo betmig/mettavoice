@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Play, Square, RotateCcw, Volume2, Timer as TimerIcon } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { useTimerStore } from '../store/timerStore';
@@ -395,7 +395,6 @@ export const TimerWidget: React.FC<TimerWidgetProps> = ({
           {timer.isRunning ? <Square size={20} /> : <Play size={20} />}
           <span>{timer.isRunning ? 'Stop' : 'Start'}</span>
         </button>
-
       </div>
     </div>
   );
