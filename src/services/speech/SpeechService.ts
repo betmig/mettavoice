@@ -1,5 +1,6 @@
 import Speech from 'speak-tts';
 import { isMobileDevice } from '../../utils/deviceDetection';
+import { speechQueueManager } from './SpeechQueueManager';
 
 export class SpeechService {
   private static instance: SpeechService;
@@ -10,7 +11,6 @@ export class SpeechService {
   private retryAttempts = 0;
   private maxRetries = 3;
   private currentVoice: SpeechSynthesisVoice | null = null;
-  private isSpeaking = false;
 
   private constructor() {
     if ('speechSynthesis' in window) {
@@ -152,69 +152,16 @@ export class SpeechService {
       throw new Error('Speech service not initialized or no voice selected');
     }
 
-    // Don't allow overlapping speech
-    if (this.isSpeaking) {
-      await this.cancel();
-    }
-
     try {
-      this.isSpeaking = true;
-
-      return new Promise((resolve, reject) => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.voice = this.currentVoice;
-        utterance.volume = this.speech?.volume || 1;
-        utterance.rate = 1;
-        utterance.pitch = 1;
-
-        const cleanup = () => {
-          this.isSpeaking = false;
-          window.speechSynthesis.cancel();
-        };
-
-        utterance.onend = () => {
-          this.isSpeaking = false;
-          resolve();
-        };
-
-        utterance.onerror = (error) => {
-          cleanup();
-          console.error('Speech synthesis error:', error);
-          if (error.error === 'interrupted' || error.error === 'canceled') {
-            resolve(); // Ignore interruption/cancellation as they're expected
-          } else {
-            reject(new Error(`Speech synthesis failed: ${error.error || 'Unknown error'}`));
-          }
-        };
-
-        // Set a timeout to prevent hanging
-        const timeoutId = setTimeout(() => {
-          cleanup();
-          reject(new Error('Speech synthesis timed out'));
-        }, 30000);
-
-        try {
-          window.speechSynthesis.cancel();
-          window.speechSynthesis.speak(utterance);
-        } catch (error) {
-          clearTimeout(timeoutId);
-          cleanup();
-          reject(error);
-        }
-      });
+      await speechQueueManager.speak(text, this.currentVoice);
     } catch (error) {
-      this.isSpeaking = false;
+      console.error('Speech synthesis error:', error);
       throw error;
     }
   }
 
   async cancel(): Promise<void> {
-    if (this.isSpeaking) {
-      window.speechSynthesis.cancel();
-      this.isSpeaking = false;
-      // Give a small delay for the cancellation to take effect
-      await new Promise(resolve => setTimeout(resolve, 100));
-    }
+    speechQueueManager.cancel();
   }
 
   async setVoice(voiceId: string): Promise<void> {
