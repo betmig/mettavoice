@@ -56,6 +56,9 @@ git clone https://github.com/betmig/metta-voice.git
 cd metta-voice
 npm install
 
+# Build the project
+npx vite build
+
 # Start development server
 npm run dev
 
