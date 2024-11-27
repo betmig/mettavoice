@@ -1,10 +1,14 @@
 export const sampleSuttas = [
   {
-    title: "Beyond Comparison",
-    content: `I have heard that on one occasion the Blessed One was staying near Sāvatthī in Jeta's Grove, Anāthapiṇḍika's monastery. Then Ven. Sāriputta went to the Blessed One and, on arrival, having bowed down to him, sat to one side. As he was sitting there, he said to the Blessed One, "Lord, in the whole world with its devas, Māras & Brahmās, its generations with their contemplatives & brahmans, their royalty & commonfolk, I see no other person who has greater discernment than the Blessed One."`,
-    source: "SN 47:12",
-    sourceUrl: "https://www.dhammatalks.org/suttas/SN/SN47_12.html",
-    category: "Noble Living"
+    title: "Goodwill / Mettā Sutta",
+    content: `“Monks, for one whose awareness-release through goodwill is cultivated, developed, pursued, given a means of transport, given a grounding, steadied, consolidated, and well-undertaken, eleven benefits can be expected. Which eleven?
+
+“One sleeps easily, wakes easily, dreams no evil dreams. One is dear to human beings, dear to non-human beings. The devas protect one. Neither fire, poison, nor weapons can touch one. One’s mind gains concentration quickly. One’s complexion is bright. One dies unconfused and—if penetrating no higher—is headed for a Brahmā world.
+
+“These are the eleven benefits that can be expected for one whose awareness-release through goodwill is cultivated, developed, pursued, handed the reins, taken as a basis, steadied, consolidated, and well-undertaken.”`,
+    source: "AN 11:16",
+    sourceUrl: "https://www.dhammatalks.org/suttas/AN/AN11_16.html",
+    category: "Goodwill"
   },
   {
     title: "The Noble Search",
