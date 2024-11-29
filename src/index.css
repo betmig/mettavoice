@@ -134,3 +134,8 @@ input[type="color"]::-webkit-color-swatch {
 body.overflow-hidden {
   padding-right: var(--scrollbar-width, 0px);
 }
+
+/* Add whitespace preservation for sutta text */
+.prose {
+  white-space: pre-wrap;
+}

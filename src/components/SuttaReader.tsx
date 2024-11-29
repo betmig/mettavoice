@@ -4,9 +4,10 @@ import { useStore } from '../store/useStore';
 import { InterfaceControls } from './controls/InterfaceControls';
 import { TimerToggle } from './controls/TimerToggle';
 import { TimerWidget } from './TimerWidget';
+import { SuttaText } from './SuttaText';
 import { initDatabase, getRandomSutta, getSutta, type Sutta } from '../db';
-import { audioService } from '../services/AudioService';
 import { formatText } from '../utils/textFormatting';
+import { prepareSpeechText, calculatePauseDuration, validateTTSProvider } from '../utils/speechUtils';
 
 export const SuttaReader: React.FC = () => {
   const { settings, isReading, setIsReading, speak, currentSuttaId, setCurrentSuttaId, updateSettings } = useStore();
@@ -17,6 +18,7 @@ export const SuttaReader: React.FC = () => {
   const [readingComplete, setReadingComplete] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showTimer, setShowTimer] = useState(settings.autoStartTimerAfterSutta);
+  
   const textContainerRef = useRef<HTMLDivElement>(null);
   const readingRef = useRef(false);
   const dbInitialized = useRef(false);
@@ -31,7 +33,7 @@ export const SuttaReader: React.FC = () => {
       try {
         await initDatabase();
         dbInitialized.current = true;
-
+        
         if (currentSuttaId) {
           const sutta = getSutta(currentSuttaId);
           if (sutta) {
@@ -78,19 +80,15 @@ export const SuttaReader: React.FC = () => {
   };
 
   const readText = async () => {
-    if (!settings.ttsProvider.enabled) {
-      setError('Text-to-speech is not enabled. Please enable it in settings.');
-      return;
-    }
-
-    if (!settings.ttsProvider.selectedVoiceId) {
-      setError('Please select a voice in settings before reading.');
+    const validationError = validateTTSProvider(settings.ttsProvider);
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
     try {
       timerWasVisibleBeforeReading.current = showTimer;
-
+      
       setIsReading(true);
       readingRef.current = true;
       setCurrentPhraseIndex(0);
@@ -102,12 +100,11 @@ export const SuttaReader: React.FC = () => {
         scrollToPhrase(i);
 
         try {
-          await speak(phrases[i]);
-
+          const cleanedText = prepareSpeechText(phrases[i]);
+          await speak(cleanedText);
+          
           if (readingRef.current) {
-            const pauseDuration = phrases[i].match(/[.!?]$/) ? 800 :
-              phrases[i].match(/[,;:]$/) ? 400 :
-                200;
+            const pauseDuration = calculatePauseDuration(phrases[i]);
             await new Promise(resolve => setTimeout(resolve, pauseDuration));
           }
         } catch (error) {
@@ -178,8 +175,7 @@ export const SuttaReader: React.FC = () => {
 
   return (
     <div className="flex flex-col space-y-4">
-      {/* Interface Controls */}
-      <div className="component-container p-4 lg:p-6">
+      <div className="component-container p-6">
         <InterfaceControls
           isReading={isReading}
           loading={loading}
@@ -190,41 +186,20 @@ export const SuttaReader: React.FC = () => {
           onStop={stopReading}
           onRandom={fetchRandomSutta}
         />
-        <div className="py-3">
-          {/* Timer Controls */}
-          <TimerToggle
-            showTimer={showTimer}
-            onToggle={handleTimerToggle}
-          />
-
-          {showTimer && (
-            <TimerWidget
-              readingComplete={readingComplete}
-              variant="minimal"
-              autoStart={timerWasVisibleBeforeReading.current}
-              transparentBg={true}
-            />
-          )}
-        </div>
-
       </div>
 
-      {/* Main Content */}
-      <div className="component-container p-4 lg:p-6">
-        {/* Sutta Content Area */}
+      <div className="component-container p-6">
         <div className={settings.fontFamily}>
-          {/* Title - Affected by font settings */}
-          <h2
-            className="text-2xl font-bold text-gray-800 dark:text-white mb-4"
+          <h2 
+            className="text-2xl font-bold text-gray-800 dark:text-white mb-6"
             style={{ fontSize: `${settings.fontSize + 12}px` }}
           >
             {currentSutta?.title || 'Daily Sutta'}
           </h2>
 
-          {/* Source and Timer Controls - Not affected by font settings */}
-          <div className="font-sans text-base mb-6">
+          <div className="font-sans mb-6">
             {currentSutta?.source && (
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-3">
                 <div className="flex items-center gap-2">
                   <LinkIcon size={16} className="text-gray-600 dark:text-gray-400" />
                   {currentSutta.sourceUrl ? (
@@ -247,37 +222,33 @@ export const SuttaReader: React.FC = () => {
                     </span>
                   )}
                 </div>
+
+                <TimerToggle
+                  showTimer={showTimer}
+                  onToggle={handleTimerToggle}
+                />
+
+                {showTimer && (
+                  <TimerWidget
+                    readingComplete={readingComplete}
+                    variant="minimal"
+                    autoStart={timerWasVisibleBeforeReading.current}
+                    transparentBg={true}
+                  />
+                )}
               </div>
             )}
           </div>
 
-          {/* Sutta Content - Affected by font settings */}
-          <div
-            ref={textContainerRef}
-            className="prose dark:prose-invert max-w-none"
-            style={{ fontSize: `${settings.fontSize}px` }}
-          >
+          <div ref={textContainerRef}>
             {currentSutta ? (
-              <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {phrases.map((phrase, index) => (
-                  <span
-                    key={index}
-                    className={`phrase inline transition-colors duration-300`}
-                    style={{
-                      backgroundColor: index === currentPhraseIndex
-                        ? `${settings.highlightColor}${Math.round(settings.highlightOpacity * 255).toString(16).padStart(2, '0')}`
-                        : 'transparent',
-                      padding: '0.125rem 0.25rem',
-                      margin: '-0.125rem 0',
-                      borderRadius: '0.25rem',
-                      lineHeight: '2',
-                    }}
-                  >
-                    {phrase}
-                    {phrase.match(/[.!?]$/) ? <br /> : ' '}
-                  </span>
-                ))}
-              </div>
+              <SuttaText
+                content={currentSutta.content}
+                currentPhraseIndex={currentPhraseIndex}
+                highlightColor={settings.highlightColor}
+                highlightOpacity={settings.highlightOpacity}
+                fontSize={settings.fontSize}
+              />
             ) : loading ? (
               <div className="flex items-center justify-center py-12">
                 <Loader2 size={32} className="animate-spin text-primary" />
@@ -289,17 +260,16 @@ export const SuttaReader: React.FC = () => {
               </div>
             )}
           </div>
-        </div>
 
-        {/* Back to Top Button - Not affected by font settings */}
-        <div className="mt-8 flex justify-center font-sans">
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-2 px-4 py-2 bg-primary text-gray-900 dark:text-gray-900 rounded-lg hover:bg-primary-hover transition-colors"
-          >
-            <ArrowUp size={20} />
-            <span>Back to Top</span>
-          </button>
+          <div className="mt-10 flex justify-center">
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-2 px-6 py-3 bg-primary text-gray-900 dark:text-gray-900 rounded-xl hover:bg-primary-hover transition-colors"
+            >
+              <ArrowUp size={20} />
+              <span>Back to Top</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
