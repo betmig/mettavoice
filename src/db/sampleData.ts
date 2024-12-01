@@ -361,4 +361,76 @@ export const sampleSuttas = [
     sourceUrl: "https://www.dhammatalks.org/suttas/MN/MN44.html",
     category: "Meditation",
   },
+  {
+    title: "The Sheaf of Barley / Yavakalāpi Sutta",
+    content: `"Suppose, monks, that a sheaf of barley were thrown down at a large four-way intersection, and six men were to come along with flails in their hands. They would thrash the sheaf of barley with their six flails. Thus the sheaf of barley would be thoroughly thrashed with the six flails. Then a seventh man would come along with a flail in his hand. He would thrash the sheaf of barley with a seventh flail. Thus the sheaf of barley would be even more thoroughly thrashed with the seventh flail.
+              "In the same way, the uninstructed run-of-the-mill person is thrashed in the eye by pleasing & unpleasing forms, thrashed in the ear by pleasing & unpleasing sounds, thrashed in the nose by pleasing & unpleasing aromas, thrashed in the tongue by pleasing & unpleasing flavors, thrashed in the body by pleasing & unpleasing tactile sensations, thrashed in the intellect by pleasing & unpleasing ideas. And if that uninstructed run-of-the-mill person forms intentions for the sake of further becoming in the future, then he, that foolish person, is even more thoroughly thrashed, just like the sheaf of barley thrashed with the seventh flail.
+              "Once, monks, the devas & asuras were arrayed for battle. Then Vepacitti, the lord of the asuras, addressed the asuras: 'If, dear sirs, in the battle of the devas arrayed against the asuras, the asuras win and the devas are defeated, bind Sakka, the lord of the devas, neck, hand, & foot and bring him before me in the city of the asuras.'
+              "As for Sakka, lord of the devas, he addressed the Devas of the Thirty-three: 'If dear sirs, in the battle of the devas arrayed against the asuras, the devas win and the asuras are defeated, bind Vepacitti, the lord of the asuras, neck, hand, & foot and bring him before me in the righteous assembly of the devas.'
+              "Now, in that battle the devas won. So the Devas of the Thirty-three bound Vepacitti, the lord of the asuras, neck, hand, & foot and brought him before Sakka in the righteous assembly of the devas.
+              "So there was Vepacitti, the lord of the asuras, bound neck, hand, & foot. When the thought occurred to him, 'The devas are in the right and the asuras in the wrong. I'm now going over to the city of the devas,' then he viewed himself as freed from that fivefold bond. He was fully provided with the five strings of heavenly sensuality. But when the thought occurred to him, 'The asuras are in the right and the devas in the wrong. I will go over to the city of the asuras,' then he viewed himself as bound with that fivefold bond, deprived of the five strings of heavenly sensuality. That's how subtle the bonds of Vepacitti were. But the bonds of Māra are even more subtle. Anyone who supposes is bound by Māra. Anyone who doesn't suppose is freed from the Evil One.
+              "'I am' is a supposition. 'I am this' is a supposition. 'I shall be' is a supposition. 'I shall not be', 'I shall be possessed of form', 'I shall not be possessed of form', 'I shall be percipient', 'I shall not be percipient', 'I shall be neither percipient nor non-percipient' is a supposition. Supposition is a disease, supposition is a cancer, supposition is an arrow. Therefore, monks, you should train yourselves: 'We will dwell with an awareness free of suppositions.'
+              "'I am' is a perturbation. 'I am this' is a perturbation. 'I shall be' is a perturbation. 'I shall not be', 'I shall be possessed of form', 'I shall not be possessed of form', 'I shall be percipient', 'I shall not be percipient', 'I shall be neither percipient nor non-percipient' is a perturbation. Perturbation is a disease, perturbation is a cancer, perturbation is an arrow. Therefore, monks, you should train yourselves: 'We will dwell with an awareness free of perturbations.'
+              "'I am' is a wavering. 'I am this' is a wavering. 'I shall be' is a wavering. 'I shall not be', 'I shall be possessed of form', 'I shall not be possessed of form', 'I shall be percipient', 'I shall not be percipient', 'I shall be neither percipient nor non-percipient' is a wavering. Wavering is a disease, wavering is a cancer, wavering is an arrow. Therefore, monks, you should train yourselves: 'We will dwell with an awareness free of waverings.'
+              "'I am' is an objectification. 'I am this' is an objectification. 'I shall be' is an objectification. 'I shall not be', 'I shall be possessed of form', 'I shall not be possessed of form', 'I shall be percipient', 'I shall not be percipient', 'I shall be neither percipient nor non-percipient' is an objectification. Objectification is a disease, objectification is a cancer, objectification is an arrow. Therefore, monks, you should train yourselves: 'We will dwell with an awareness free of objectifications.'
+              "'I am' is an act of conceit. 'I am this' is an act of conceit. 'I shall be' is an act of conceit. 'I shall not be', 'I shall be possessed of form', 'I shall not be possessed of form', 'I shall be percipient', 'I shall not be percipient', 'I shall be neither percipient nor non-percipient' is an act of conceit. An act of conceit is a disease, an act of conceit is a cancer, an act of conceit is an arrow. Therefore, monks, you should train yourselves: 'We will dwell with an awareness free of acts of conceit.'"`,
+    source: "SN 35:207",
+    sourceUrl: "https://www.dhammatalks.org/suttas/AN/AN6_13.html",
+    category: "Unbinding",
+  },
+  {
+    title: "Kappa’s Question",
+    content: `For one stranded in the middle of the lake,
+              in the flood of great danger, birth, 
+              overwhelmed with aging & death:
+              Tell me the island, dear sir,
+              and show me the island
+              so that this may not happen again.
+              The Buddha:
+              For one stranded in the middle of the lake,
+              in the flood of great danger, birth, 
+              overwhelmed with aging & death,
+              Kappa, I will tell you the island.1
+              Having nothing, free
+              of clinging:
+              That is the island,
+              there is no other.
+              That’s unbinding, I tell you,
+              the total ending of aging & death.
+              Those knowing this, mindful,
+              fully unbound
+              in the here-&-now,
+              don’t serve as Māra’s servants,
+              don’t come under Māra’s sway.`,
+    source: "Sn 5:10",
+    sourceUrl: "https://www.dhammatalks.org/suttas/KN/StNp/StNp5_10.html",
+    category: "Unbinding",
+  },
+  {
+    title: "Self-protected / Atta-rakkhita Sutta",
+    content: `Near Sāvatthī. As he was sitting to one side, King Pasenadi Kosala said to the Blessed One: “Just now, lord, while I was alone in seclusion, this train of thought arose in my awareness: ‘Who have themselves protected, and who leave themselves unprotected?’ Then it occurred to me: ‘Those who engage in bodily misconduct, verbal misconduct, & mental misconduct leave themselves unprotected. Even though a squadron of elephant troops might protect them, a squadron of cavalry troops, a squadron of chariot troops, a squadron of infantry troops might protect them, still they leave themselves unprotected. Why is that? Because that’s an external protection, not an internal one. Therefore they leave themselves unprotected. But those who engage in good bodily conduct, good verbal conduct, & good mental conduct have themselves protected. Even though neither a squadron of elephant troops, a squadron of cavalry troops, a squadron of chariot troops, nor a squadron of infantry troops might protect them, still they have themselves protected. Why is that? Because that’s an internal protection, not an external one. Therefore they have themselves protected.’”
+              “That’s the way it is, great king! That’s the way it is! Those who engage in bodily misconduct, verbal misconduct, & mental misconduct leave themselves unprotected. Even though a squadron of elephant troops might protect them, a squadron of cavalry troops, a squadron of chariot troops, a squadron of infantry troops might protect them, still they leave themselves unprotected. Why is that? Because that’s an external protection, not an internal one. Therefore they leave themselves unprotected. But those who engage in good bodily conduct, good verbal conduct, & good mental conduct have themselves protected. Even though neither a squadron of elephant troops, a squadron of cavalry troops, a squadron of chariot troops, nor a squadron of infantry troops might protect them, still they have themselves protected. Why is that? Because that’s an internal protection, not an external one. Therefore they have themselves protected.”
+              That is what the Blessed One said. Having said that, the One Well-Gone, the Teacher, said further:
+              “Restraint with the body is good,
+              good is restraint with speech.
+              Restraint with the heart is good,
+              good is restraint, everywhere.
+              Restrained everywhere,
+              conscientious,
+              one is said to be,
+              protected.”`,
+    source: "SN 3:5",
+    sourceUrl: "https://www.dhammatalks.org/suttas/SN/SN3_5.html",
+    category: "Seclusion",
+  },
+  {
+    title: "Rapture / Pīti Sutta",
+    content: `Then Anāthapiṇḍika the householder, surrounded by about 500 lay followers, went to the Blessed One and, on arrival, having bowed down to him, sat to one side. As he was sitting there the Blessed One said to him, “Householder, you have provided the Saṅgha of monks with robes, alms food, lodgings, & medicinal requisites for the sick, but you shouldn’t rest content with the thought, ‘We have provided the Saṅgha of monks with robes, alms food, lodgings, & medicinal requisites for the sick.’ So you should train yourself, ‘Let’s periodically enter & remain in seclusion & rapture.’ That’s how you should train yourself.”
+              When this was said, Ven. Sāriputta said to the Blessed One, “It’s amazing, lord. It’s astounding, how well put that was by the Blessed One: ‘Householder, you have provided the Saṅgha of monks with robes, alms food, lodgings, & medicinal requisites for the sick, but you shouldn’t rest content with the thought, “We have provided the Saṅgha of monks with robes, alms food, lodgings, & medicinal requisites for the sick.” So you should train yourself, “Let’s periodically enter & remain in seclusion & rapture.” That’s how you should train yourself.’
+              “Lord, when a disciple of the noble ones enters & remains in seclusion & rapture, there are five possibilities that do not exist at that time: The pain & distress dependent on sensuality do not exist at that time. The pleasure & joy dependent on sensuality do not exist at that time. The pain & distress dependent on what is unskillful do not exist at that time. The pleasure & joy dependent on what is unskillful do not exist at that time. The pain & distress dependent on what is skillful do not exist at that time. When a disciple of the noble ones enters & remains in seclusion & rapture, these five possibilities do not exist at that time.”
+              (The Blessed One said:) “Excellent, Sāriputta. Excellent. When a disciple of the noble ones enters & remains in seclusion & rapture, there are five possibilities that do not exist at that time: The pain & distress dependent on sensuality do not exist at that time. The pleasure & joy dependent on sensuality do not exist at that time. The pain & distress dependent on what is unskillful do not exist at that time. The pleasure & joy dependent on what is unskillful do not exist at that time. The pain & distress dependent on what is skillful do not exist at that time. When a disciple of the noble ones enters & remains in seclusion & rapture, these five possibilities do not exist at that time.”`,
+    source: "AN 5:176",
+    sourceUrl: "https://www.dhammatalks.org/suttas/AN/AN5_176.html",
+    category: "Rapture",
+  },
 ];
