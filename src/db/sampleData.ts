@@ -375,7 +375,7 @@ export const sampleSuttas = [
               "'I am' is an objectification. 'I am this' is an objectification. 'I shall be' is an objectification. 'I shall not be', 'I shall be possessed of form', 'I shall not be possessed of form', 'I shall be percipient', 'I shall not be percipient', 'I shall be neither percipient nor non-percipient' is an objectification. Objectification is a disease, objectification is a cancer, objectification is an arrow. Therefore, monks, you should train yourselves: 'We will dwell with an awareness free of objectifications.'
               "'I am' is an act of conceit. 'I am this' is an act of conceit. 'I shall be' is an act of conceit. 'I shall not be', 'I shall be possessed of form', 'I shall not be possessed of form', 'I shall be percipient', 'I shall not be percipient', 'I shall be neither percipient nor non-percipient' is an act of conceit. An act of conceit is a disease, an act of conceit is a cancer, an act of conceit is an arrow. Therefore, monks, you should train yourselves: 'We will dwell with an awareness free of acts of conceit.'"`,
     source: "SN 35:207",
-    sourceUrl: "https://www.dhammatalks.org/suttas/AN/AN6_13.html",
+    sourceUrl: "https://www.dhammatalks.org/suttas/SN/SN35_207.html",
     category: "Unbinding",
   },
   {

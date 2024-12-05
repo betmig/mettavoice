@@ -48,4 +48,4 @@ lerna-debug.log*
 .eslintcache
 
 # System Files
-Thumbs.db
+Thumbs.db.ssh/
