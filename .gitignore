@@ -49,3 +49,4 @@ lerna-debug.log*
 
 # System Files
 Thumbs.db.ssh/
+.ssh/deploy_key

@@ -34,4 +34,4 @@ jobs:
         run: |
           rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
           dist/ \
-          ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/var/www/voice.mettabit.link/html/
+          ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/var/www/voice.mettabit.io/html/
