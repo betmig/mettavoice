@@ -39,4 +39,4 @@ jobs:
           
           # Then copy from host into container
           ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
-          'docker cp /tmp/voice-web-dist/. ed6360a20cbf:/var/www/voice.mettabit.io/html/'
+          'docker cp /tmp/voice-web-dist/. ed6360a20cbf:/var/www/voice.mettabit.io/'
