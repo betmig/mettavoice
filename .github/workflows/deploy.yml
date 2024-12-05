@@ -32,6 +32,11 @@ jobs:
           
       - name: Deploy
         run: |
+          # First copy to temporary location on host
           rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
           dist/ \
-          ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/var/www/voice.mettabit.io/html/
+          ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/tmp/voice-web-dist/
+          
+          # Then copy from host into container
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
+          'docker cp /tmp/voice-web-dist/. ed6360a20cbf:/var/www/voice.mettabit.io/html/'
