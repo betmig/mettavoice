@@ -25,15 +25,7 @@ jobs:
         
       - name: Build
         run: npx vite build
-
-      - name: Debug SSH setup
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-        run: |
-          ls -la ~/.ssh || true
-          ssh-keygen -l -f ~/.ssh/deploy_key || true
-          echo "Host is: $DEPLOY_HOST"
-          
+        
       - name: Setup SSH
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
@@ -43,25 +35,19 @@ jobs:
           echo "$DEPLOY_KEY" | tr -d '\r' > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/deploy_key || (echo "Failed to add SSH key" && cat ~/.ssh/deploy_key && exit 1)
-          ssh-keyscan -t rsa $DEPLOY_HOST >> ~/.ssh/known_hosts || (echo "Failed to scan host key" && exit 1)
-          ls -la ~/.ssh
-          
-      - name: Test SSH Connection
-        env:
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-        run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -vvv ${DEPLOY_USER}@${DEPLOY_HOST} 'echo "SSH connection test"'
+          ssh-add ~/.ssh/deploy_key
+          # Using port 2222
+          ssh-keyscan -H -p 2222 $DEPLOY_HOST >> ~/.ssh/known_hosts 2>/dev/null
+          chmod 644 ~/.ssh/known_hosts
           
       - name: Deploy
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
-          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+          rsync -avz --delete -e "ssh -p 2222 -i ~/.ssh/deploy_key" \
             dist/ \
             ${DEPLOY_USER}@${DEPLOY_HOST}:/home/${DEPLOY_USER}/docker/voice/data/
           
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_HOST} \
+          ssh -p 2222 -i ~/.ssh/deploy_key ${DEPLOY_USER}@${DEPLOY_HOST} \
             "cd /home/${DEPLOY_USER}/docker/voice && docker-compose down && docker-compose up -d"
