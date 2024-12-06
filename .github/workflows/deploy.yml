@@ -24,24 +24,37 @@ jobs:
         run: npx vite build
         
       - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
-
-      - name: Add known hosts
         run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
           
-      - name: Deploy
-        env:
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      - name: Verify paths and deploy
         run: |
-          # Verify SSH connection
-          ssh -T $DEPLOY_USER@$DEPLOY_HOST -o StrictHostKeyChecking=accept-new exit || exit 1
+          # Check if dist directory exists locally
+          ls -la dist/
+          
+          # Create temporary directory on remote host
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "mkdir -p /tmp/voice-web-dist"
           
           # First copy to temporary location on host
-          rsync -avz --delete dist/ $DEPLOY_USER@$DEPLOY_HOST:/tmp/voice-web-dist/
+          rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
+          dist/ \
+          ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/tmp/voice-web-dist/
+          
+          # Verify container exists and is running
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
+          'docker ps | grep ed6360a20cbf || echo "Container not found"'
+          
+          # Verify destination directory exists in container
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
+          'docker exec ed6360a20cbf ls -la /var/www/voice.mettabit.io/ || echo "Directory not found in container"'
           
           # Then copy from host into container
-          ssh $DEPLOY_USER@$DEPLOY_HOST 'docker cp /tmp/voice-web-dist/. ed6360a20cbf:/var/www/voice.mettabit.io/'
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
+          'docker cp /tmp/voice-web-dist/. ed6360a20cbf:/var/www/voice.mettabit.io/'
+          
+          # Verify files were copied
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
+          'docker exec ed6360a20cbf ls -la /var/www/voice.mettabit.io/'
