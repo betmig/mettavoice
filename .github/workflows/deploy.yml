@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v3
       
@@ -24,23 +27,24 @@ jobs:
         run: npx vite build
         
       - name: Setup SSH
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         run: |
+          set -e
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          echo "$DEPLOY_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          # Connect to the host server, not the container
           ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
           
       - name: Deploy
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
-          # First verify we can connect to the host server
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} 'echo "SSH connection successful"'
-          
-          # Copy files to the host server
+          set -e
           rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
-          dist/ \
-          ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/home/${{ secrets.DEPLOY_USER }}/voice-web-dist/
+            dist/ \
+            ${DEPLOY_USER}@${DEPLOY_HOST}:/home/${DEPLOY_USER}/docker/voice/data/
           
-          # Then use docker cp from the host server to copy into the container
-          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
-          'docker cp /home/${{ secrets.DEPLOY_USER }}/voice-web-dist/. ed6360a20cbf:/var/www/voice.mettabit.io/'
+          ssh -i ~/.ssh/deploy_key ${DEPLOY_USER}@${DEPLOY_HOST} \
+            "cd /home/${DEPLOY_USER}/docker/voice && docker-compose down && docker-compose up -d"
