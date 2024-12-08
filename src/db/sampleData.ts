@@ -379,7 +379,7 @@ export const sampleSuttas = [
     category: "Unbinding",
   },
   {
-    title: "Kappa’s Question",
+    title: "Kappa’ s Question",
     content: `For one stranded in the middle of the lake,
               in the flood of great danger, birth, 
               overwhelmed with aging & death:
